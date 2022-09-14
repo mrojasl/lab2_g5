@@ -10,19 +10,11 @@ import java.util.Objects;
 @Embeddable
 public class WalletXCurrencyId implements Serializable {
     private static final long serialVersionUID = 6356733904259447932L;
-    @Column(name = "currency_idcurrency", nullable = false)
-    private Integer currencyIdcurrency;
-
     @Column(name = "wallet_idwallet", nullable = false)
     private Integer walletIdwallet;
 
-    public Integer getCurrencyIdcurrency() {
-        return currencyIdcurrency;
-    }
-
-    public void setCurrencyIdcurrency(Integer currencyIdcurrency) {
-        this.currencyIdcurrency = currencyIdcurrency;
-    }
+    @Column(name = "currency_idcurrency", nullable = false)
+    private Integer currencyIdcurrency;
 
     public Integer getWalletIdwallet() {
         return walletIdwallet;
@@ -30,6 +22,14 @@ public class WalletXCurrencyId implements Serializable {
 
     public void setWalletIdwallet(Integer walletIdwallet) {
         this.walletIdwallet = walletIdwallet;
+    }
+
+    public Integer getCurrencyIdcurrency() {
+        return currencyIdcurrency;
+    }
+
+    public void setCurrencyIdcurrency(Integer currencyIdcurrency) {
+        this.currencyIdcurrency = currencyIdcurrency;
     }
 
     @Override

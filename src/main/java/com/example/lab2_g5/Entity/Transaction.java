@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "transaction")
 public class Transaction {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idtransaction", nullable = false)
     private Integer id;
 
@@ -27,16 +28,16 @@ public class Transaction {
     @Column(name = "status", nullable = false, length = 45)
     private String status;
 
-    @Column(name = "currency", nullable = false, length = 45)
-    private String currency;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_iduser", nullable = false)
     private User userIduser;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "wallet_from", nullable = false)
     private Wallet walletFrom;
+
+    @Column(name = "currency", nullable = false, length = 45)
+    private String currency;
 
     public Integer getId() {
         return id;
@@ -94,14 +95,6 @@ public class Transaction {
         this.status = status;
     }
 
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
     public User getUserIduser() {
         return userIduser;
     }
@@ -116,6 +109,14 @@ public class Transaction {
 
     public void setWalletFrom(Wallet walletFrom) {
         this.walletFrom = walletFrom;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
 }

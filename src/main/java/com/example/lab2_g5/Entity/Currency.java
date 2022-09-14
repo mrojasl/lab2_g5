@@ -1,13 +1,12 @@
 package com.example.lab2_g5.Entity;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "currency")
 public class Currency {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idcurrency", nullable = false)
     private Integer id;
 
@@ -25,7 +24,6 @@ public class Currency {
 
     @Column(name = "price", nullable = false)
     private Double price;
-
 
     public Integer getId() {
         return id;
@@ -74,6 +72,5 @@ public class Currency {
     public void setPrice(Double price) {
         this.price = price;
     }
-
 
 }

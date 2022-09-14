@@ -1,26 +1,24 @@
 package com.example.lab2_g5.Entity;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "wallet")
 public class Wallet {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idwallet", nullable = false)
     private Integer id;
 
     @Column(name = "address", nullable = false, length = 45)
     private String address;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_iduser", nullable = false)
     private User userIduser;
 
     @Column(name = "total_usd", nullable = false, length = 45)
     private String totalUsd;
-
 
     public Integer getId() {
         return id;
