@@ -1,49 +1,48 @@
 package com.example.lab2_g5.Entity;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
-@Table(name = "transaction")
 public class Transaction {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "idtransaction", nullable = false)
-    private Integer id;
-
-    @Column(name = "description", length = 45)
+    @Column(name = "idtransaction")
+    private int idtransaction;
+    @Basic
+    @Column(name = "description")
     private String description;
-
-    @Column(name = "tx_id", nullable = false, length = 80)
+    @Basic
+    @Column(name = "tx_id")
     private String txId;
-
-    @Column(name = "amount", nullable = false)
-    private Double amount;
-
-    @Column(name = "neetwork_fee", nullable = false)
-    private Double neetworkFee;
-
-    @Column(name = "block", nullable = false)
-    private Integer block;
-
-    @Column(name = "status", nullable = false, length = 45)
+    @Basic
+    @Column(name = "amount")
+    private double amount;
+    @Basic
+    @Column(name = "neetwork_fee")
+    private double neetworkFee;
+    @Basic
+    @Column(name = "block")
+    private int block;
+    @Basic
+    @Column(name = "status")
     private String status;
-
-    @Column(name = "currency", nullable = false, length = 45)
+    @Basic
+    @Column(name = "currency")
     private String currency;
+    @Basic
+    @Column(name = "user_iduser")
+    private int userIduser;
+    @Basic
+    @Column(name = "wallet_from")
+    private int walletFrom;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_iduser", nullable = false)
-    private User userIduser;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "wallet_from", nullable = false)
-    private Wallet walletFrom;
-
-    public Integer getId() {
-        return id;
+    public int getIdtransaction() {
+        return idtransaction;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdtransaction(int idtransaction) {
+        this.idtransaction = idtransaction;
     }
 
     public String getDescription() {
@@ -62,27 +61,27 @@ public class Transaction {
         this.txId = txId;
     }
 
-    public Double getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public Double getNeetworkFee() {
+    public double getNeetworkFee() {
         return neetworkFee;
     }
 
-    public void setNeetworkFee(Double neetworkFee) {
+    public void setNeetworkFee(double neetworkFee) {
         this.neetworkFee = neetworkFee;
     }
 
-    public Integer getBlock() {
+    public int getBlock() {
         return block;
     }
 
-    public void setBlock(Integer block) {
+    public void setBlock(int block) {
         this.block = block;
     }
 
@@ -102,20 +101,32 @@ public class Transaction {
         this.currency = currency;
     }
 
-    public User getUserIduser() {
+    public int getUserIduser() {
         return userIduser;
     }
 
-    public void setUserIduser(User userIduser) {
+    public void setUserIduser(int userIduser) {
         this.userIduser = userIduser;
     }
 
-    public Wallet getWalletFrom() {
+    public int getWalletFrom() {
         return walletFrom;
     }
 
-    public void setWalletFrom(Wallet walletFrom) {
+    public void setWalletFrom(int walletFrom) {
         this.walletFrom = walletFrom;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Transaction that = (Transaction) o;
+        return idtransaction == that.idtransaction && Double.compare(that.amount, amount) == 0 && Double.compare(that.neetworkFee, neetworkFee) == 0 && block == that.block && userIduser == that.userIduser && walletFrom == that.walletFrom && Objects.equals(description, that.description) && Objects.equals(txId, that.txId) && Objects.equals(status, that.status) && Objects.equals(currency, that.currency);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idtransaction, description, txId, amount, neetworkFee, block, status, currency, userIduser, walletFrom);
+    }
 }
