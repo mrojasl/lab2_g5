@@ -1,0 +1,84 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class='container'>
+  <div id="content">
+    <main>
+
+      <div class="page-header text-center">
+        <h2>Nueva Transaccion</h2>
+      </div>
+      <div class="container-fluid">
+        <form method="POST" th:action="">
+
+          <div class="mb-3">
+            <label for="description" class="form-label">Descripcion de la Tx</label>
+            <input name="description" type="text" required="required" class="form-control" id="description">
+          </div>
+
+          <div class="mb-3">
+            <label for="currency" class="form-label">Criptomoneda</label>
+            <select name="currency" id="currency">
+              <option th:each="criptomoneda" value=""></option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="tx_id" class="form-label">TxID</label>
+            <input name="tx_id" type="text" maxlength="42" required="required" class="form-control" id="tx_id">
+          </div>
+
+          <div class="mb-3">
+            <label for="amount" class="form-label">Cantidad</label>
+            <input name="amount" type="text" required="required" class="form-control" id="amount">
+          </div>
+
+          <div class="mb-3">
+            <label for="neetwork_fee" class="form-label">Comision</label>
+            <input name="neetwork_fee" type="text" required="required" class="form-control" id="neetwork_fee">
+          </div>
+
+          <div class="mb-3">
+            <label for="block" class="form-label"># Bloque</label>
+            <input name="block" type="number" min="10000000" max="99999999" required="required" class="form-control" id="block">
+          </div>
+
+          <div class="mb-3">
+            <label for="status" class="form-label">Estado</label>
+            <select name="status" id="status">
+              <option th:each="" value=""></option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="wallet_from" class="form-label">Billetera</label>
+            <select name="wallet_from" id="wallet_from">
+              <option th:each="" value=""></option>
+            </select>
+          </div>
+
+
+
+          <a href="/distribuidoras/lista" class="btn btn-danger">Cancelar</a>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+      </div>
+    </main>
+  </div>
+  <!-- /Contenido -->
+  <footer class="py-4 bg-light mt-auto">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center justify-content-between small">
+        <div class="text-muted">Grupo 5 - PUCP @ 2022</div>
+      </div>
+    </div>
+  </footer>
+</div>
+</body>
+</html>
