@@ -1,5 +1,6 @@
 package com.example.lab2_g5.Controller;
 
+import com.example.lab2_g5.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
