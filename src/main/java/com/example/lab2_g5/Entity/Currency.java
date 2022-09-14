@@ -26,8 +26,6 @@ public class Currency {
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @OneToMany(mappedBy = "currency")
-    private Set<com.example.lab2_g5.WalletHasCurrencyWallet> walletHasCurrencyWallets = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -77,12 +75,5 @@ public class Currency {
         this.price = price;
     }
 
-    public Set<com.example.lab2_g5.WalletHasCurrencyWallet> getWalletHasCurrencyWallets() {
-        return walletHasCurrencyWallets;
-    }
-
-    public void setWalletHasCurrencyWallets(Set<com.example.lab2_g5.WalletHasCurrencyWallet> walletHasCurrencyWallets) {
-        this.walletHasCurrencyWallets = walletHasCurrencyWallets;
-    }
 
 }

@@ -9,12 +9,12 @@ public class WalletXCurrency {
     private WalletXCurrencyId id;
 
     @MapsId("currencyIdcurrency")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "currency_idcurrency", nullable = false)
     private Currency currencyIdcurrency;
 
     @MapsId("walletIdwallet")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "wallet_idwallet", nullable = false)
     private Wallet walletIdwallet;
 

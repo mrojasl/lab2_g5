@@ -20,12 +20,6 @@ public class User {
     @Column(name = "password", nullable = false, length = 45)
     private String password;
 
-    @OneToMany(mappedBy = "userIduser")
-    private Set<Wallet> wallets = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "userIduser")
-    private Set<Transaction> transactions = new LinkedHashSet<>();
-
     public Integer getId() {
         return id;
     }
@@ -56,22 +50,6 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Set<Wallet> getWallets() {
-        return wallets;
-    }
-
-    public void setWallets(Set<Wallet> wallets) {
-        this.wallets = wallets;
-    }
-
-    public Set<Transaction> getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(Set<Transaction> transactions) {
-        this.transactions = transactions;
     }
 
 }
