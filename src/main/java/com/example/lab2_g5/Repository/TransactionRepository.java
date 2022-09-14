@@ -11,4 +11,7 @@ import java.util.List;
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
 
     List<Transaction> findByTxId(String id);
+
+
+    List<Transaction> findAll();
 }
