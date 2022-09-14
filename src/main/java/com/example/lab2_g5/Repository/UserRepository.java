@@ -9,11 +9,8 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    @Query(value = "SELECT * FROM user where email = ?1",
-            nativeQuery = true)
-    User obtenerUsuarioDeEmail(String email);
 
     @Query(value = "select * from user where email = ?1",
             nativeQuery = true)
-    User obtenerPswdDeEmail(String email);
+    User obtenerUserDeEmail(String email);
 }

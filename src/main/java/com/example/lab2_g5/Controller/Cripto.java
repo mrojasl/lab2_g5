@@ -2,6 +2,7 @@ package com.example.lab2_g5.Controller;
 
 import com.example.lab2_g5.Entity.Currency;
 import com.example.lab2_g5.Entity.Transaction;
+import com.example.lab2_g5.Entity.User;
 import com.example.lab2_g5.Entity.Wallet;
 import com.example.lab2_g5.Repository.CurrencyRepository;
 import com.example.lab2_g5.Repository.TransactionRepository;
@@ -9,11 +10,9 @@ import com.example.lab2_g5.Repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,8 +28,8 @@ public class Cripto {
     WalletRepository walletRepository;
 
     @GetMapping(value = {"/listtx", ""})
-    public String listarTransactions(Model model) {
-
+    public String listarTransactions(Model model, @ModelAttribute("user") User user) {
+        model.addAttribute("user",user);
         List<Transaction> lista = transactionRepository.findAll();
         model.addAttribute("transactionList", lista);
 
@@ -49,11 +48,18 @@ public class Cripto {
     }
 
     @GetMapping("/newtx")
-    public String newtx(Model model){
+    public String newtx(Model model, HttpSession session){
+        User user = null;
+        if (session.getAttribute("user") != null) {
+            user = (User) session.getAttribute("user");
+        }
+
+
         List<Currency> lista1 = currencyRepository.findAll();
         List<Transaction> lista2 = transactionRepository.findAll();
         List<Wallet> lista3 = walletRepository.findAll();
 
+        model.addAttribute("user",user);
         model.addAttribute("currencyList", lista1);
         model.addAttribute("statusList", lista2);
         model.addAttribute("walletList", lista3);
@@ -62,9 +68,9 @@ public class Cripto {
     }
 
     @PostMapping("/savetx")
-    String savetx(Transaction transaction){
+    public String savetx(Transaction transaction){
         transactionRepository.save(transaction);
-        return "redirect:/listtx";
+        return "redirect:/cripto/listtx";
     }
 
 
