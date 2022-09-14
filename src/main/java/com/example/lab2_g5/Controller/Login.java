@@ -23,7 +23,7 @@ public class Login {
 
     @GetMapping("")
     String login(){
-        return "redirect:/cripto/listarcurrency";
+        return "inicio2";
     }
 
     @PostMapping("verificar")
