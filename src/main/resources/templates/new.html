@@ -15,7 +15,7 @@
         <h2>Nueva Transaccion</h2>
       </div>
       <div class="container-fluid">
-        <form method="POST" th:action="">
+        <form method="POST" th:action="@{/cripto/savetx}">
 
           <div class="mb-3">
             <label for="description" class="form-label">Descripcion de la Tx</label>
@@ -25,7 +25,7 @@
           <div class="mb-3">
             <label for="currency" class="form-label">Criptomoneda</label>
             <select name="currency" id="currency">
-              <option th:each="criptomoneda" value=""></option>
+              <option th:each="criptomoneda:${currencyList}" th:value="${criptomoneda.id}" th:text="${criptomoneda.name}"></option>
             </select>
           </div>
 
@@ -52,20 +52,20 @@
           <div class="mb-3">
             <label for="status" class="form-label">Estado</label>
             <select name="status" id="status">
-              <option th:each="" value=""></option>
+              <option th:each="status :${statusList}" th:value="${status.id}" th:text="${status.status}"></option>
             </select>
           </div>
 
           <div class="mb-3">
             <label for="wallet_from" class="form-label">Billetera</label>
             <select name="wallet_from" id="wallet_from">
-              <option th:each="" value=""></option>
+              <option th:each="wallet : ${walletList}" th:value="${wallet.id}" th:text="${wallet.address}"></option>
             </select>
           </div>
 
 
 
-          <a href="/distribuidoras/lista" class="btn btn-danger">Cancelar</a>
+          <a href="/cripto/listtx" class="btn btn-danger">Cancelar</a>
           <button type="submit" class="btn btn-primary">Guardar</button>
         </form>
       </div>

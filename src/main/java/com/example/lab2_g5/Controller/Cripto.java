@@ -1,7 +1,11 @@
 package com.example.lab2_g5.Controller;
 
+import com.example.lab2_g5.Entity.Currency;
 import com.example.lab2_g5.Entity.Transaction;
+import com.example.lab2_g5.Entity.Wallet;
+import com.example.lab2_g5.Repository.CurrencyRepository;
 import com.example.lab2_g5.Repository.TransactionRepository;
+import com.example.lab2_g5.Repository.WalletRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +23,10 @@ public class Cripto {
 
     @Autowired
     TransactionRepository transactionRepository;
+    @Autowired
+    CurrencyRepository currencyRepository;
+    @Autowired
+    WalletRepository walletRepository;
 
     @GetMapping(value = {"/listtx", ""})
     public String listarTransactions(Model model) {
@@ -31,28 +39,32 @@ public class Cripto {
 
     @PostMapping(value = "/searchtx")
     public String buscarTransactionId(@RequestParam("searchField") String searchField, Model model){
+        List<Transaction> lista = transactionRepository.findAll();
 
-        try {
-            List<Transaction> transactionList = transactionRepository.findByTxId(searchField);
-            model.addAttribute("transactionList",transactionList);
-        }catch (NumberFormatException e){
-            System.out.println("Error de parseo");
-        }
+        List<Transaction> transactionList = transactionRepository.findByTxId(searchField);
+        model.addAttribute("transactionList",transactionList);
+
+
         return "wallet";
     }
 
-    @GetMapping("newtx")
-    String newtx(){
+    @GetMapping("/newtx")
+    public String newtx(Model model){
+        List<Currency> lista1 = currencyRepository.findAll();
+        List<Transaction> lista2 = transactionRepository.findAll();
+        List<Wallet> lista3 = walletRepository.findAll();
+
+        model.addAttribute("currencyList", lista1);
+        model.addAttribute("statusList", lista2);
+        model.addAttribute("walletList", lista3);
 
         return "new";
     }
 
-    @GetMapping("savetx")
+    @PostMapping("/savetx")
     String savetx(Transaction transaction){
         transactionRepository.save(transaction);
-
-
-        return "redirect:/newtx";
+        return "redirect:/listtx";
     }
 
 
