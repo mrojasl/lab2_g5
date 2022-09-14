@@ -1,10 +1,12 @@
 package com.example.lab2_g5.Controller;
 
+import com.example.lab2_g5.Entity.Transaction;
 import com.example.lab2_g5.Repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,12 +29,11 @@ public class Cripto {
         return "wallet";
     }
 
-    @GetMapping(value = "/searchtx")
+    @PostMapping(value = "/searchtx")
     public String buscarTransactionId(@RequestParam("searchField") String searchField, Model model){
 
         try {
-            int searchFieldInt = Integer.parseInt(searchField);
-            Optional<Transaction> transactionList = transactionRepository.findById(searchFieldInt);
+            List<Transaction> transactionList = transactionRepository.findByTxId(searchField);
             model.addAttribute("transactionList",transactionList);
         }catch (NumberFormatException e){
             System.out.println("Error de parseo");

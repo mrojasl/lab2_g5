@@ -9,7 +9,6 @@ import java.util.List;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
-    @Query(value = "select idtransaction, neetwork_fee, amount, block, currency, status, wallet_from from transaction",
-            nativeQuery = true)
-    List<Transaction> listarTransactions();
+
+    List<Transaction> findByTxId(String id);
 }
