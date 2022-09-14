@@ -23,7 +23,7 @@ public class Login {
 
     @GetMapping("")
     String login(){
-        return "inicio2";
+        return "redirect:/cripto/listarcurrency";
     }
 
     @PostMapping("verificar")
@@ -33,7 +33,7 @@ public class Login {
             User user = userRepository.obtenerUserDeEmail(correo);
             if (user.getPassword().equals(pswd)) {
                 session.setAttribute("user", user);
-                return "redirect:/cripto";
+                return "redirect:/cripto/listarcurrency";
             }
         }catch (Exception e){
             attr.addFlashAttribute("msg","Error al iniciar sesión");

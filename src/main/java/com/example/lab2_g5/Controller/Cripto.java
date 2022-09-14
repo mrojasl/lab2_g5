@@ -91,5 +91,14 @@ public class Cripto {
         return "redirect:/cripto/listtx";
     }
 
+    @GetMapping("/listarcurrency")
+    public String listarc(Model model){
+        List<Currency> lista= currencyRepository.findAll();
+        model.addAttribute("currencyrList", lista);
+        return "principal";
+
+
+    }
+
 
 }
