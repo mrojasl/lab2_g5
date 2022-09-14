@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,13 +25,15 @@ public class Login {
     }
 
     @PostMapping("verificar")
-    String verificar(@RequestParam("correo") String correo, @RequestParam("pswd") String pswd){
+    String verificar(RedirectAttributes attr,
+            @RequestParam("correo") String correo, @RequestParam("pswd") String pswd){
         try {
             User user = userRepository.obtenerPswdDeEmail(correo);
             if (user.getPassword().equals(pswd)) {
                 return "redirect:/cripto";
             }
-        }catch (NullPointerException e){
+        }catch (Exception e){
+            attr.addFlashAttribute("msg","Error al iniciar sesión");
             return "redirect:/login";
         }
         return "redirect:/login";
