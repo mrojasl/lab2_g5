@@ -30,11 +30,11 @@ public class Transaction {
     @Column(name = "currency", nullable = false, length = 45)
     private String currency;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "user_iduser", nullable = false)
     private User userIduser;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "wallet_from", nullable = false)
     private Wallet walletFrom;
 

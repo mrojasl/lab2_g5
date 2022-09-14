@@ -14,18 +14,13 @@ public class Wallet {
     @Column(name = "address", nullable = false, length = 45)
     private String address;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
     @JoinColumn(name = "user_iduser", nullable = false)
     private User userIduser;
 
     @Column(name = "total_usd", nullable = false, length = 45)
     private String totalUsd;
 
-    @OneToMany(mappedBy = "wallet")
-    private Set<com.example.lab2_g5.WalletHasCurrencyWallet> walletHasCurrencyWallets = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "walletFrom")
-    private Set<Transaction> transactions = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -57,22 +52,6 @@ public class Wallet {
 
     public void setTotalUsd(String totalUsd) {
         this.totalUsd = totalUsd;
-    }
-
-    public Set<com.example.lab2_g5.WalletHasCurrencyWallet> getWalletHasCurrencyWallets() {
-        return walletHasCurrencyWallets;
-    }
-
-    public void setWalletHasCurrencyWallets(Set<com.example.lab2_g5.WalletHasCurrencyWallet> walletHasCurrencyWallets) {
-        this.walletHasCurrencyWallets = walletHasCurrencyWallets;
-    }
-
-    public Set<Transaction> getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(Set<Transaction> transactions) {
-        this.transactions = transactions;
     }
 
 }
