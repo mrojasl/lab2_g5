@@ -1,9 +1,6 @@
 package com.example.lab2_g5.Controller;
 
-import com.example.lab2_g5.Entity.Currency;
-import com.example.lab2_g5.Entity.Transaction;
-import com.example.lab2_g5.Entity.User;
-import com.example.lab2_g5.Entity.Wallet;
+import com.example.lab2_g5.Entity.*;
 import com.example.lab2_g5.Repository.CurrencyRepository;
 import com.example.lab2_g5.Repository.TransactionRepository;
 import com.example.lab2_g5.Repository.WalletRepository;
@@ -27,13 +24,34 @@ public class Cripto {
     @Autowired
     WalletRepository walletRepository;
 
-    @GetMapping(value = {"/listtx", ""})
+    @GetMapping(value = {"/listtx"})
     public String listarTransactions(Model model, @ModelAttribute("user") User user) {
         model.addAttribute("user",user);
         List<Transaction> lista = transactionRepository.findAll();
         model.addAttribute("transactionList", lista);
 
         return "wallet";
+    }
+
+    @GetMapping(value = {"/mywallet"})
+    public String myWallet(Model model, HttpSession session) {
+        User user = null;
+        if (session.getAttribute("user") != null) {
+            user = (User) session.getAttribute("user");
+        }
+        List<MyWalletDTO> lista = transactionRepository.TxPersonal(user.getId());
+        model.addAttribute("transactionList", lista);
+
+        return "mywallet";
+    }
+
+    @GetMapping(value = {""})
+    public String index(Model model, HttpSession session) {
+        User user = null;
+        if (session.getAttribute("user") != null) {
+            user = (User) session.getAttribute("user");
+        }
+        return "principal";
     }
 
     @PostMapping(value = "/searchtx")
