@@ -12,6 +12,8 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 
     List<Transaction> findByTxId(String id);
 
-
+    @Query(nativeQuery = true,
+    value = "SELECT * FROM transaction where tx_id like %?1%")
+    List<Transaction> buscarPorTxId(String text);
     List<Transaction> findAll();
 }

@@ -40,7 +40,7 @@ public class Cripto {
     public String buscarTransactionId(@RequestParam("searchField") String searchField, Model model){
         List<Transaction> lista = transactionRepository.findAll();
 
-        List<Transaction> transactionList = transactionRepository.findByTxId(searchField);
+        List<Transaction> transactionList = transactionRepository.buscarPorTxId(searchField);
         model.addAttribute("transactionList",transactionList);
 
 
