@@ -60,13 +60,13 @@
         </div>
 
         <div class="row" th:class="row">
-                <div class="col-sm-6 mt-4 ml-2 mb-4" >
+                <div th:each="currency, info : ${currencyrList}" class="col-sm-6 mt-4 ml-2 mb-4" >
                     <div class="card text-center border-white bg-transparent">
-                        <div th:each="currency, info : ${currencyrList}" class="card-body">
+                        <div  class="card-body">
                             <h5 class="card-title" th:text="${currency.getName()}"></h5>
-                            <p class="card-text" th:text="${currency.getNetwork()}"></p>
+                            <p class="card-text" th:text="'Red: '+${currency.getNetwork()}"></p>
                             <p class="card-text" th:text="${currency.getDescription()}"></p>
-                            <p class="text-success h3" th:text="${currency.getPrice()}"></p>
+                            <p class="text-success h3" th:text="${currency.getPrice()}+'(BUSD)'"></p>
                         </div>
                     </div>
                 </div>
