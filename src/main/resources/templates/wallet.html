@@ -16,32 +16,33 @@
 </head>
 <body class="container-fluid mt-4">
 <h2 class="text-center mb-4">Mis Transacciones</h2>
+
 <form method="post" th:action="@{/cripto/searchtx}">
   <input name="searchField" class="form-control mb-3" type="text" placeholder="Search" aria-label="Search">
 </form>
+<div class="ui-corner-right">
+  <button>Nueva Transaccion</button>
+</div>
 <table class="table table-dark table-striped">
   <tr>
     <th class="text-center">#</th>
     <th class="text-center">TxID de Wallet</th>
     <th class="text-center">Criptomoneda</th>
-    <th class="text-center">Precio de compra (BUSD)</th>
     <th class="text-center">Cantidad Comprada</th>
     <th class="text-center">Tarifa de red</th>
     <th class="text-center"># de bloque</th>
-    <th class="text-center">Criptomoneda</th>
     <th class="text-center">Status</th>
     <th class="text-center">Wallet</th>
   </tr>
   <tr th:each="trans, info: ${transactionList}" >
     <td class="text-center" th:text="${info.index +1}"></td>
-    <td class="text-center" th:text="${trans.idtransaction}"></td>
-    <td class="text-center" th:text="${trans.tx_id}"></td>
-    <td class="text-center" th:text="${trans.amount}"></td>
-    <td class="text-center" th:text="${trans.neetwork_fee}"></td>
-    <td class="text-center" th:text="${trans.block}"></td>
+    <td class="text-center" th:text="${trans.txId}"></td>
     <td class="text-center" th:text="${trans.currency}"></td>
+    <td class="text-center" th:text="${trans.amount}"></td>
+    <td class="text-center" th:text="${trans.neetworkFee}"></td>
+    <td class="text-center" th:text="${trans.block}"></td>
     <td class="text-center" th:text="${trans.status}"></td>
-    <td class="text-center" th:text="${trans.wallet_from}"></td>
+    <td class="text-center" th:text="${trans.walletFrom.getAddress()}"></td>
   </tr>
 </table>
 
